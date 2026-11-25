@@ -1,0 +1,19 @@
+services:
+  netsoak:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: netsoak-noc
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      MAX_DURATION_SECONDS: ${MAX_DURATION_SECONDS:-86400}
+      MAX_BANDWIDTH_MBPS: ${MAX_BANDWIDTH_MBPS:-0}
+      MAX_PARALLEL_STREAMS: ${MAX_PARALLEL_STREAMS:-6}
+      MAX_ACTIVE_SESSIONS_PER_CLIENT: ${MAX_ACTIVE_SESSIONS_PER_CLIENT:-2}
+      MAX_TRANSFER_GB: ${MAX_TRANSFER_GB:-0}
+      RATE_LIMIT_WINDOW_MS: ${RATE_LIMIT_WINDOW_MS:-60000}
+      RATE_LIMIT_MAX_REQUESTS: ${RATE_LIMIT_MAX_REQUESTS:-120}
